@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    color: #713f12;
+    font-size: 2.6em;
+  }
+
+  .right-side {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    button {
+      padding: 5px 20px;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.4em;
+      font-weight: bold;
+    }
+  }
+
+  .theme {
+    background-color: #f0d9b5;
+    color: #b58863 !important;
+  }
+
+  .reset {
+    background-color: #f87171;
+  }
+}
+
+body {
+  display: grid;
+  justify-content: center;
+}
+
+#chessboard {
+  width: 600px;
+  height: 600px;
+  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  border: 8px solid #713f12;
+  border-radius: 10px;
+
+  .square {
+    width: 12.5%;
+    height: 12.5%;
+  }
+
+  .black {
+    background-color: #f0d9b5;
+  }
+  .white {
+    background-color: #b58863;
+  }
+}
+
+.light-dark-mode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  img {
+    width: 25px;
+  }
+}
