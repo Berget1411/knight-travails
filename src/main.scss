@@ -30,6 +30,12 @@ header {
       border-radius: 10px;
       font-size: 1.2em;
       font-weight: bold;
+      cursor: pointer;
+      transition: filter 0.2s;
+
+      &:hover {
+        filter: brightness(105%);
+      }
     }
   }
 
