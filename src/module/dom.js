@@ -12,6 +12,8 @@ pawnImg.src = pawnSrc;
 pawnImg.classList.add('icons');
 
 const dom = (() => {
+  const instructionDisplay = document.querySelector('#instructions h1');
+  const belowInstructions = document.querySelector('#instructions p');
   let start;
   let target;
   let count = 0;
@@ -20,6 +22,8 @@ const dom = (() => {
     createBoard();
     resetVar();
     loadHandlers();
+    belowInstructions.textContent = '';
+    instructionDisplay.textContent = 'Select starting square of the knight';
   };
 
   const resetVar = () => {
@@ -53,6 +57,7 @@ const dom = (() => {
       if (count === 0) {
         start = e.target.id.split(',').map((str) => parseInt(str));
         e.target.append(knightImg);
+        instructionDisplay.textContent = 'Select square to attack';
       } else {
         target = e.target.id.split(',').map((str) => parseInt(str));
         e.target.append(pawnImg);
@@ -63,7 +68,10 @@ const dom = (() => {
   }
 
   function moveKnight() {
+    instructionDisplay.textContent = ``;
+    let textPath = '';
     let moves = knightMoves(start, target);
+    console.log(moves);
     moves.forEach((move, index) => {
       setTimeout(() => {
         if (index > 0) {
@@ -73,7 +81,15 @@ const dom = (() => {
         }
         const square = document.getElementById(move.coordinates);
         square.style.backgroundColor = '#064e3b';
-        if (moves.length - 1 === index) square.textContent = '';
+        if (moves.length - 1 === index) {
+          square.textContent = '';
+          instructionDisplay.textContent = `You made it in ${
+            moves.length - 1
+          } moves!`;
+          textPath += `[${move.coordinates}]`;
+          belowInstructions.textContent = textPath;
+        }
+        textPath += `[${move.coordinates}] => `;
         square.append(knightImg);
       }, index * 400);
     });
