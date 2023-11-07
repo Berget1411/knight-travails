@@ -1,5 +1,5 @@
-import handler from './module/handlers';
+import dom from './module/dom';
 
 window.onload = () => {
-  handler();
+  dom.render();
 };
