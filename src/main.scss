@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap');
 
+:root {
+  --primary-color: #713f12;
+  --secondary-color: #b58863;
+  --third-color: #f0d9b5;
+
+  &.second-theme {
+    --primary-color: #1e3a8a;
+    --secondary-color: #3b82f6;
+    --third-color: #dbeafe;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,7 +26,7 @@ header {
   align-items: center;
 
   h1 {
-    color: #713f12;
+    color: var(--primary-color);
     font-size: 2.4em;
   }
 
@@ -40,8 +52,8 @@ header {
   }
 
   .theme {
-    background-color: #f0d9b5;
-    color: #b58863 !important;
+    background-color: var(--third-color);
+    color: var(--secondary-color) !important;
   }
 
   .reset {
@@ -60,7 +72,7 @@ body {
   display: grid;
   display: flex;
   flex-wrap: wrap;
-  border: 8px solid #713f12;
+  border: 8px solid var(--primary-color);
   border-radius: 10px;
 
   .square {
@@ -72,10 +84,10 @@ body {
   }
 
   .black {
-    background-color: #f0d9b5;
+    background-color: var(--third-color);
   }
   .white {
-    background-color: #b58863;
+    background-color: var(--secondary-color);
   }
 }
 
@@ -98,12 +110,11 @@ body {
   padding: 20px;
   font-weight: bold;
   text-align: center;
-  color: #064e3b;
-  background-color: #f0d9b5;
+  color: var(--primary-color);
+  background-color: var(--third-color);
   margin-top: 20px;
   border-radius: 10px;
-  border: 8px solid #713f12;
-
+  border: 8px solid var(--primary-color);
   h1 {
     font-size: 1.8em;
     margin-bottom: 10px;
@@ -114,6 +125,6 @@ body {
     padding: 5px 10px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.2);
-    color: #053b2d;
+    color: var(--primary-color);
   }
 }

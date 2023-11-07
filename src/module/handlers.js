@@ -6,6 +6,10 @@ const loadHandlers = () => {
     .forEach((square) => square.addEventListener('click', dom.clickedSquare));
 
   document.querySelector('.reset').addEventListener('click', dom.render);
+
+  document.querySelector('.theme').addEventListener('click', () => {
+    document.documentElement.classList.toggle('second-theme');
+  });
 };
 
 export default loadHandlers;
