@@ -19,7 +19,7 @@ const dom = (() => {
   const render = () => {
     createBoard();
     resetVar();
-    loadHandlers();
+    loadHandlers.squares();
     belowInstructions.textContent = '';
     instructionDisplay.textContent = 'Select starting square';
   };
