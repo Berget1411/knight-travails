@@ -23,7 +23,7 @@ const dom = (() => {
     resetVar();
     loadHandlers();
     belowInstructions.textContent = '';
-    instructionDisplay.textContent = 'Select starting square of the knight';
+    instructionDisplay.textContent = 'Select starting square';
   };
 
   const resetVar = () => {
@@ -57,7 +57,7 @@ const dom = (() => {
       if (count === 0) {
         start = e.target.id.split(',').map((str) => parseInt(str));
         e.target.append(knightImg);
-        instructionDisplay.textContent = 'Select square to attack';
+        instructionDisplay.textContent = 'Select target';
       } else {
         target = e.target.id.split(',').map((str) => parseInt(str));
         e.target.append(pawnImg);
