@@ -6,13 +6,11 @@ import pawnSrc from '../assets/images/pawn.svg';
 
 const knightImg = document.createElement('img');
 knightImg.src = knightSrc;
-knightImg.classList.add('icons');
 const pawnImg = document.createElement('img');
 pawnImg.src = pawnSrc;
-pawnImg.classList.add('icons');
 
 const dom = (() => {
-  const instructionDisplay = document.querySelector('#instructions h1');
+  const instructionDisplay = document.querySelector('#instructions h2');
   const belowInstructions = document.querySelector('#instructions p');
   let start;
   let target;
