@@ -9,9 +9,12 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _module_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./module/dom */ "./src/module/dom.js");
+/* harmony import */ var _module_handlers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./module/handlers */ "./src/module/handlers.js");
+
 
 window.onload = function () {
   _module_dom__WEBPACK_IMPORTED_MODULE_0__["default"].render();
+  _module_handlers__WEBPACK_IMPORTED_MODULE_1__["default"].others();
 };
 
 /***/ }),
@@ -49,7 +52,7 @@ var dom = function () {
   var render = function render() {
     createBoard();
     resetVar();
-    (0,_handlers__WEBPACK_IMPORTED_MODULE_1__["default"])();
+    _handlers__WEBPACK_IMPORTED_MODULE_1__["default"].squares();
     belowInstructions.textContent = '';
     instructionDisplay.textContent = 'Select starting square';
   };
@@ -138,15 +141,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dom */ "./src/module/dom.js");
 
-var loadHandlers = function loadHandlers() {
-  document.querySelectorAll('#chessboard div').forEach(function (square) {
-    return square.addEventListener('click', _dom__WEBPACK_IMPORTED_MODULE_0__["default"].clickedSquare);
-  });
-  document.querySelector('.reset').addEventListener('click', _dom__WEBPACK_IMPORTED_MODULE_0__["default"].render);
-  document.querySelector('.theme').addEventListener('click', function () {
-    document.documentElement.classList.toggle('second-theme');
-  });
-};
+var loadHandlers = function () {
+  var squares = function squares() {
+    document.querySelectorAll('#chessboard div').forEach(function (square) {
+      return square.addEventListener('click', _dom__WEBPACK_IMPORTED_MODULE_0__["default"].clickedSquare);
+    });
+  };
+  var others = function others() {
+    document.querySelector('.reset').addEventListener('click', _dom__WEBPACK_IMPORTED_MODULE_0__["default"].render);
+    document.querySelector('.theme').addEventListener('click', function () {
+      document.documentElement.classList.toggle('second-theme');
+    });
+  };
+  return {
+    squares: squares,
+    others: others
+  };
+}();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loadHandlers);
 
 /***/ }),
@@ -326,8 +337,17 @@ ___CSS_LOADER_EXPORT___.push([module.id, `:root {
   font-family: "Montserrat", sans-serif;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+}
+
 header {
-  padding: 20px 0px;
+  width: 600px;
+  padding: 40px 0px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -360,11 +380,6 @@ header .theme {
 }
 header .reset {
   background-color: #f87171;
-}
-
-body {
-  display: grid;
-  justify-content: center;
 }
 
 #chessboard {
@@ -501,7 +516,7 @@ footer a:hover {
   #instructions p {
     font-size: 0.8em;
   }
-}`, "",{"version":3,"sources":["webpack://./src/main.scss"],"names":[],"mappings":"AAEA;EACE,wBAAA;EACA,0BAAA;EACA,sBAAA;AAAF;AAEE;EACE,wBAAA;EACA,0BAAA;EACA,sBAAA;AAAJ;;AAIA;EACE,sBAAA;EACA,SAAA;EACA,UAAA;EACA,qCAAA;AADF;;AAIA;EACE,iBAAA;EACA,aAAA;EACA,8BAAA;EACA,mBAAA;AADF;AAGE;EACE,2BAAA;EACA,gBAAA;AADJ;AAIE;EACE,aAAA;EACA,mBAAA;EACA,SAAA;AAFJ;AAII;EACE,iBAAA;EACA,YAAA;EACA,YAAA;EACA,mBAAA;EACA,gBAAA;EACA,iBAAA;EACA,eAAA;EACA,uBAAA;AAFN;AAIM;EACE,wBAAA;AAFR;AAOE;EACE,oCAAA;EACA,wCAAA;AALJ;AAQE;EACE,yBAAA;AANJ;;AAUA;EACE,aAAA;EACA,uBAAA;AAPF;;AAUA;EACE,YAAA;EACA,aAAA;EACA,aAAA;EACA,aAAA;EACA,eAAA;EACA,sCAAA;EACA,mBAAA;AAPF;AASE;EACE,YAAA;EACA,aAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;AAPJ;AAUE;EACE,oCAAA;AARJ;AAUE;EACE,wCAAA;AARJ;AAWE;EACE,WAAA;AATJ;;AAaA;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,SAAA;AAVF;AAWE;EACE,WAAA;AATJ;;AAaA;EACE,YAAA;EACA,aAAA;EACA,iBAAA;EACA,kBAAA;EACA,2BAAA;EACA,oCAAA;EACA,gBAAA;EACA,mBAAA;EACA,sCAAA;AAVF;AAWE;EACE,gBAAA;EACA,mBAAA;AATJ;AAWE;EACE,gBAAA;EACA,iBAAA;EACA,iBAAA;EACA,kBAAA;EACA,oCAAA;EACA,2BAAA;AATJ;;AAaA;EACE,kBAAA;EACA,SAAA;EACA,WAAA;EACA,aAAA;EAEA,iBAAA;AAXF;AAYE;EACE,2BAAA;EACA,kBAAA;AAVJ;AAYE;EACE,qBAAA;EACA,6BAAA;EACA,sBAAA;AAVJ;AAYI;EACE,yBAAA;AAVN;;AAeA;EACE;IACE,YAAA;EAZF;EAcE;IACE,cAAA;EAZJ;EAcE;IACE,yBAAA;EAZJ;EAeA;IACE,aAAA;IACA,YAAA;EAbF;EAeE;IACE,WAAA;EAbJ;EAiBA;IACE,YAAA;EAfF;EAiBE;IACE,gBAAA;EAfJ;EAiBE;IACE,cAAA;EAfJ;AACF;AAmBA;EACE;IACE,YAAA;EAjBF;EAmBE;IACE,gBAAA;EAjBJ;EAmBE;IACE,2BAAA;IACA,4BAAA;EAjBJ;EAoBA;IACE,aAAA;IACA,YAAA;EAlBF;EAoBE;IACE,WAAA;EAlBJ;EAsBA;IACE,YAAA;EApBF;EAsBE;IACE,gBAAA;EApBJ;EAsBE;IACE,gBAAA;EApBJ;AACF","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap');\r\n\r\n:root {\r\n  --primary-color: #713f12;\r\n  --secondary-color: #b58863;\r\n  --third-color: #f0d9b5;\r\n\r\n  &.second-theme {\r\n    --primary-color: #1e3a8a;\r\n    --secondary-color: #3b82f6;\r\n    --third-color: #dbeafe;\r\n  }\r\n}\r\n\r\n* {\r\n  box-sizing: border-box;\r\n  margin: 0;\r\n  padding: 0;\r\n  font-family: 'Montserrat', sans-serif;\r\n}\r\n\r\nheader {\r\n  padding: 20px 0px;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n\r\n  h1 {\r\n    color: var(--primary-color);\r\n    font-size: 2.4em;\r\n  }\r\n\r\n  .right-side {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 20px;\r\n\r\n    button {\r\n      padding: 5px 20px;\r\n      color: white;\r\n      border: none;\r\n      border-radius: 10px;\r\n      font-size: 1.2em;\r\n      font-weight: bold;\r\n      cursor: pointer;\r\n      transition: filter 0.2s;\r\n\r\n      &:hover {\r\n        filter: brightness(105%);\r\n      }\r\n    }\r\n  }\r\n\r\n  .theme {\r\n    background-color: var(--third-color);\r\n    color: var(--secondary-color) !important;\r\n  }\r\n\r\n  .reset {\r\n    background-color: #f87171;\r\n  }\r\n}\r\n\r\nbody {\r\n  display: grid;\r\n  justify-content: center;\r\n}\r\n\r\n#chessboard {\r\n  width: 600px;\r\n  height: 600px;\r\n  display: grid;\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  border: 8px solid var(--primary-color);\r\n  border-radius: 10px;\r\n\r\n  .square {\r\n    width: 12.5%;\r\n    height: 12.5%;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n  }\r\n\r\n  .black {\r\n    background-color: var(--third-color);\r\n  }\r\n  .white {\r\n    background-color: var(--secondary-color);\r\n  }\r\n\r\n  img {\r\n    width: 40px;\r\n  }\r\n}\r\n\r\n.light-dark-mode {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  gap: 15px;\r\n  img {\r\n    width: 25px;\r\n  }\r\n}\r\n\r\n#instructions {\r\n  width: 600px;\r\n  padding: 20px;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: var(--primary-color);\r\n  background-color: var(--third-color);\r\n  margin-top: 20px;\r\n  border-radius: 10px;\r\n  border: 8px solid var(--primary-color);\r\n  h2 {\r\n    font-size: 1.8em;\r\n    margin-bottom: 10px;\r\n  }\r\n  p {\r\n    font-size: 1.2em;\r\n    font-weight: bold;\r\n    padding: 5px 10px;\r\n    border-radius: 5px;\r\n    background-color: rgba(0, 0, 0, 0.2);\r\n    color: var(--primary-color);\r\n  }\r\n}\r\n\r\nfooter {\r\n  position: absolute;\r\n  bottom: 0;\r\n  width: 100%;\r\n  padding: 30px;\r\n\r\n  font-weight: bold;\r\n  p {\r\n    color: var(--primary-color);\r\n    text-align: center;\r\n  }\r\n  a {\r\n    text-decoration: none;\r\n    color: var(--secondary-color);\r\n    transition: color 0.2s;\r\n\r\n    &:hover {\r\n      color: var(--third-color);\r\n    }\r\n  }\r\n}\r\n\r\n@media (max-width: 650px) {\r\n  header {\r\n    width: 500px;\r\n\r\n    h1 {\r\n      font-size: 2em;\r\n    }\r\n    button {\r\n      font-size: 1em !important;\r\n    }\r\n  }\r\n  #chessboard {\r\n    height: 500px;\r\n    width: 500px;\r\n\r\n    img {\r\n      width: 30px;\r\n    }\r\n  }\r\n\r\n  #instructions {\r\n    width: 500px;\r\n\r\n    h2 {\r\n      font-size: 1.6em;\r\n    }\r\n    p {\r\n      font-size: 1em;\r\n    }\r\n  }\r\n}\r\n\r\n@media (max-width: 500px) {\r\n  header {\r\n    width: 350px;\r\n\r\n    h1 {\r\n      font-size: 1.3em;\r\n    }\r\n    button {\r\n      font-size: 0.8em !important;\r\n      padding: 5px 10px !important;\r\n    }\r\n  }\r\n  #chessboard {\r\n    height: 350px;\r\n    width: 350px;\r\n\r\n    img {\r\n      width: 20px;\r\n    }\r\n  }\r\n\r\n  #instructions {\r\n    width: 350px;\r\n\r\n    h2 {\r\n      font-size: 1.2em;\r\n    }\r\n    p {\r\n      font-size: 0.8em;\r\n    }\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/main.scss"],"names":[],"mappings":"AAEA;EACE,wBAAA;EACA,0BAAA;EACA,sBAAA;AAAF;AAEE;EACE,wBAAA;EACA,0BAAA;EACA,sBAAA;AAAJ;;AAIA;EACE,sBAAA;EACA,SAAA;EACA,UAAA;EACA,qCAAA;AADF;;AAIA;EACE,aAAA;EACA,sBAAA;EACA,mBAAA;EACA,kBAAA;EACA,aAAA;AADF;;AAIA;EACE,YAAA;EACA,iBAAA;EACA,aAAA;EACA,8BAAA;EACA,mBAAA;AADF;AAGE;EACE,2BAAA;EACA,gBAAA;AADJ;AAIE;EACE,aAAA;EACA,mBAAA;EACA,SAAA;AAFJ;AAII;EACE,iBAAA;EACA,YAAA;EACA,YAAA;EACA,mBAAA;EACA,gBAAA;EACA,iBAAA;EACA,eAAA;EACA,uBAAA;AAFN;AAIM;EACE,wBAAA;AAFR;AAOE;EACE,oCAAA;EACA,wCAAA;AALJ;AAQE;EACE,yBAAA;AANJ;;AAUA;EACE,YAAA;EACA,aAAA;EACA,aAAA;EACA,aAAA;EACA,eAAA;EACA,sCAAA;EACA,mBAAA;AAPF;AASE;EACE,YAAA;EACA,aAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;AAPJ;AAUE;EACE,oCAAA;AARJ;AAUE;EACE,wCAAA;AARJ;AAWE;EACE,WAAA;AATJ;;AAaA;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,SAAA;AAVF;AAWE;EACE,WAAA;AATJ;;AAaA;EACE,YAAA;EACA,aAAA;EACA,iBAAA;EACA,kBAAA;EACA,2BAAA;EACA,oCAAA;EACA,gBAAA;EACA,mBAAA;EACA,sCAAA;AAVF;AAWE;EACE,gBAAA;EACA,mBAAA;AATJ;AAWE;EACE,gBAAA;EACA,iBAAA;EACA,iBAAA;EACA,kBAAA;EACA,oCAAA;EACA,2BAAA;AATJ;;AAaA;EACE,kBAAA;EACA,SAAA;EACA,WAAA;EACA,aAAA;EAEA,iBAAA;AAXF;AAYE;EACE,2BAAA;EACA,kBAAA;AAVJ;AAYE;EACE,qBAAA;EACA,6BAAA;EACA,sBAAA;AAVJ;AAYI;EACE,yBAAA;AAVN;;AAeA;EACE;IACE,YAAA;EAZF;EAcE;IACE,cAAA;EAZJ;EAcE;IACE,yBAAA;EAZJ;EAeA;IACE,aAAA;IACA,YAAA;EAbF;EAeE;IACE,WAAA;EAbJ;EAiBA;IACE,YAAA;EAfF;EAiBE;IACE,gBAAA;EAfJ;EAiBE;IACE,cAAA;EAfJ;AACF;AAmBA;EACE;IACE,YAAA;EAjBF;EAmBE;IACE,gBAAA;EAjBJ;EAmBE;IACE,2BAAA;IACA,4BAAA;EAjBJ;EAoBA;IACE,aAAA;IACA,YAAA;EAlBF;EAoBE;IACE,WAAA;EAlBJ;EAsBA;IACE,YAAA;EApBF;EAsBE;IACE,gBAAA;EApBJ;EAsBE;IACE,gBAAA;EApBJ;AACF","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap');\r\n\r\n:root {\r\n  --primary-color: #713f12;\r\n  --secondary-color: #b58863;\r\n  --third-color: #f0d9b5;\r\n\r\n  &.second-theme {\r\n    --primary-color: #1e3a8a;\r\n    --secondary-color: #3b82f6;\r\n    --third-color: #dbeafe;\r\n  }\r\n}\r\n\r\n* {\r\n  box-sizing: border-box;\r\n  margin: 0;\r\n  padding: 0;\r\n  font-family: 'Montserrat', sans-serif;\r\n}\r\n\r\nbody {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  position: relative;\r\n  height: 100vh;\r\n}\r\n\r\nheader {\r\n  width: 600px;\r\n  padding: 40px 0px;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n\r\n  h1 {\r\n    color: var(--primary-color);\r\n    font-size: 2.4em;\r\n  }\r\n\r\n  .right-side {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 20px;\r\n\r\n    button {\r\n      padding: 5px 20px;\r\n      color: white;\r\n      border: none;\r\n      border-radius: 10px;\r\n      font-size: 1.2em;\r\n      font-weight: bold;\r\n      cursor: pointer;\r\n      transition: filter 0.2s;\r\n\r\n      &:hover {\r\n        filter: brightness(105%);\r\n      }\r\n    }\r\n  }\r\n\r\n  .theme {\r\n    background-color: var(--third-color);\r\n    color: var(--secondary-color) !important;\r\n  }\r\n\r\n  .reset {\r\n    background-color: #f87171;\r\n  }\r\n}\r\n\r\n#chessboard {\r\n  width: 600px;\r\n  height: 600px;\r\n  display: grid;\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  border: 8px solid var(--primary-color);\r\n  border-radius: 10px;\r\n\r\n  .square {\r\n    width: 12.5%;\r\n    height: 12.5%;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n  }\r\n\r\n  .black {\r\n    background-color: var(--third-color);\r\n  }\r\n  .white {\r\n    background-color: var(--secondary-color);\r\n  }\r\n\r\n  img {\r\n    width: 40px;\r\n  }\r\n}\r\n\r\n.light-dark-mode {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  gap: 15px;\r\n  img {\r\n    width: 25px;\r\n  }\r\n}\r\n\r\n#instructions {\r\n  width: 600px;\r\n  padding: 20px;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: var(--primary-color);\r\n  background-color: var(--third-color);\r\n  margin-top: 20px;\r\n  border-radius: 10px;\r\n  border: 8px solid var(--primary-color);\r\n  h2 {\r\n    font-size: 1.8em;\r\n    margin-bottom: 10px;\r\n  }\r\n  p {\r\n    font-size: 1.2em;\r\n    font-weight: bold;\r\n    padding: 5px 10px;\r\n    border-radius: 5px;\r\n    background-color: rgba(0, 0, 0, 0.2);\r\n    color: var(--primary-color);\r\n  }\r\n}\r\n\r\nfooter {\r\n  position: absolute;\r\n  bottom: 0;\r\n  width: 100%;\r\n  padding: 30px;\r\n\r\n  font-weight: bold;\r\n  p {\r\n    color: var(--primary-color);\r\n    text-align: center;\r\n  }\r\n  a {\r\n    text-decoration: none;\r\n    color: var(--secondary-color);\r\n    transition: color 0.2s;\r\n\r\n    &:hover {\r\n      color: var(--third-color);\r\n    }\r\n  }\r\n}\r\n\r\n@media (max-width: 650px) {\r\n  header {\r\n    width: 500px;\r\n\r\n    h1 {\r\n      font-size: 2em;\r\n    }\r\n    button {\r\n      font-size: 1em !important;\r\n    }\r\n  }\r\n  #chessboard {\r\n    height: 500px;\r\n    width: 500px;\r\n\r\n    img {\r\n      width: 30px;\r\n    }\r\n  }\r\n\r\n  #instructions {\r\n    width: 500px;\r\n\r\n    h2 {\r\n      font-size: 1.6em;\r\n    }\r\n    p {\r\n      font-size: 1em;\r\n    }\r\n  }\r\n}\r\n\r\n@media (max-width: 500px) {\r\n  header {\r\n    width: 350px;\r\n\r\n    h1 {\r\n      font-size: 1.3em;\r\n    }\r\n    button {\r\n      font-size: 0.8em !important;\r\n      padding: 5px 10px !important;\r\n    }\r\n  }\r\n  #chessboard {\r\n    height: 350px;\r\n    width: 350px;\r\n\r\n    img {\r\n      width: 20px;\r\n    }\r\n  }\r\n\r\n  #instructions {\r\n    width: 350px;\r\n\r\n    h2 {\r\n      font-size: 1.2em;\r\n    }\r\n    p {\r\n      font-size: 0.8em;\r\n    }\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -974,4 +989,4 @@ module.exports = __webpack_require__.p + "pawn.svg";
 /******/ var __webpack_exports__ = (__webpack_exec__("./src/index.js"));
 /******/ }
 ]);
-//# sourceMappingURL=bundle960523c8378d2cc9a7f8.js.map
+//# sourceMappingURL=bundle9878d95f5c3a7b2423b9.js.map
